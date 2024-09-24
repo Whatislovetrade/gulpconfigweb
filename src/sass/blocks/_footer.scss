@@ -4,4 +4,8 @@
     font-size: 39px;
     text-align: center;
     color: wheat;
+
+    @media(max-width: 1200px) {
+        font-size: 10px;
+    }
 }

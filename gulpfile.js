@@ -5,6 +5,9 @@ const server = require('gulp-server-livereload')
 const clean = require('gulp-clean')
 const fs = require('fs')
 const sourceMaps = require('gulp-sourcemaps')
+const groupMedia = require('gulp-group-css-media-queries')
+const plumber = require('gulp-plumber')
+const notify = require('gulp-notify')
 
 const fileIncludeSettings = {
     prefix: '@@',
@@ -13,6 +16,14 @@ const fileIncludeSettings = {
 const serverOptions = {
     livereload: true,
     open: true,
+}
+
+const plumberSassConfig = {
+    errorHandler: notify.onError({
+        title: 'Styles',
+        message: 'Error <%= error.message %>',
+        sound: false
+    })
 }
 
 gulp.task('clean', function(done) {
@@ -31,8 +42,10 @@ gulp.task('html', function() {
 
 gulp.task('sass', function() {
     return gulp.src('src/sass/**/*.+(scss|sass)')
+        .pipe(plumber(plumberSassConfig))
         .pipe(sourceMaps.init())
         .pipe(sass().on('error', sass.logError))
+        // .pipe(groupMedia())
         .pipe(sourceMaps.write())
         // .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./dist/css'));
