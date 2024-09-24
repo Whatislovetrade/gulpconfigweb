@@ -1,0 +1,21 @@
+npm install gulp
+            gulp-sass
+            gulp-clean-css 
+            gulp-htmlmin 
+            gulp-imagemin 
+            gulp-autoprefixer 
+            browser-sync 
+            del --save-dev
+
+
+npm i gulp 
+      gulp-sass 
+      sass 
+      gulp-file-include 
+      gulp-clean 
+      gulp-server-livereload 
+      gulp-sourcemaps 
+      gulp-plumber
+      gulp-notify 
+      gulp-group-css-media-queries --save-dev
+
