@@ -5,7 +5,7 @@ const server = require('gulp-server-livereload')
 const clean = require('gulp-clean')
 const fs = require('fs')
 const sourceMaps = require('gulp-sourcemaps')
-const groupMedia = require('gulp-group-css-media-queries')
+// const groupMedia = require('gulp-group-css-media-queries')
 const plumber = require('gulp-plumber')
 const notify = require('gulp-notify')
 
@@ -65,6 +65,16 @@ gulp.task('images', function() {
         .pipe(gulp.dest('./dist/img/'))
 })
 
+gulp.task('fonts', function() {
+    return gulp.src('./src/fonts/**/*')
+        .pipe(gulp.dest('./dist/fonts/'))
+})
+
+gulp.task('files', function() {
+    return gulp.src('./src/files/**/*')
+        .pipe(gulp.dest('./dist/files/'))
+})
+
 gulp.task('server', function() {
     return gulp.src('./dist/')
         .pipe(server(serverOptions))
@@ -74,11 +84,13 @@ gulp.task('watch', function() {
     gulp.watch('./src/sass/**/*.scss', gulp.parallel('sass'))
     gulp.watch('./src/**/*.html', gulp.parallel('html'))
     gulp.watch('./src/img/**/*', gulp.parallel('images'))
+    gulp.watch('./src/fonts/**/*', gulp.parallel('fonts'))
+    gulp.watch('./src/files/**/*', gulp.parallel('files'))
 })
 
 gulp.task('default', gulp.series(
     'clean',
-     gulp.parallel('html', 'sass', 'images'),
+     gulp.parallel('html', 'sass', 'images', 'fonts', 'files'),
      gulp.parallel('server', 'watch')
 
 ))
