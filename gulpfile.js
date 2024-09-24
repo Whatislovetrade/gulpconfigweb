@@ -26,6 +26,14 @@ const plumberSassConfig = {
     })
 }
 
+const plumberHtmlConfig = {
+    errorHandler: notify.onError({
+        title: 'Html',
+        message: 'Error <%= error.message %>',
+        sound: false
+    })
+}
+
 gulp.task('clean', function(done) {
     if(fs.existsSync('./dist/')) {
         return gulp.src('./dist/', {read: false})
@@ -36,6 +44,7 @@ gulp.task('clean', function(done) {
 
 gulp.task('html', function() {
     return gulp.src('./src/*.html')
+        .pipe(plumber(plumberHtmlConfig))
         .pipe(fileInclude(fileIncludeSettings))
         .pipe(gulp.dest('./dist'))
 })
