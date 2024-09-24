@@ -4,6 +4,7 @@ const sass = require('gulp-sass')(require('sass'))
 const server = require('gulp-server-livereload')
 const clean = require('gulp-clean')
 const fs = require('fs')
+const sourceMaps = require('gulp-sourcemaps')
 
 const fileIncludeSettings = {
     prefix: '@@',
@@ -30,7 +31,9 @@ gulp.task('html', function() {
 
 gulp.task('sass', function() {
     return gulp.src('src/sass/**/*.+(scss|sass)')
+        .pipe(sourceMaps.init())
         .pipe(sass().on('error', sass.logError))
+        .pipe(sourceMaps.write())
         // .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./dist/css'));
 })
