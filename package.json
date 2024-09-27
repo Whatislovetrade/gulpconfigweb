@@ -1,7 +1,10 @@
 {
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
     "css-loader": "^7.1.2",
     "gulp": "^5.0.0",
+    "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-file-include": "^2.3.0",
     "gulp-group-css-media-queries": "^1.2.2",
@@ -13,5 +16,10 @@
     "sass": "^1.79.3",
     "style-loader": "^4.0.0",
     "webpack-stream": "^7.0.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }

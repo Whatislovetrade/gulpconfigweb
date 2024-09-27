@@ -11,6 +11,8 @@ const notify = require('gulp-notify')
 
 const webpack = require('webpack-stream')
 
+const babel = require('gulp-babel')
+
 const fileIncludeSettings = {
     prefix: '@@',
     basepath: '@file'
@@ -74,7 +76,8 @@ gulp.task('files', function() {
 gulp.task('js', function() {
     return gulp.src('./src/js/*.js')
         .pipe(plumber(plumberNotify('JS')))
-        .pipe(webpack(require('./webpack.config')))
+        .pipe(babel())
+        .pipe(webpack(require('./webpack.config.js')))
         .pipe(gulp.dest('./dist/js'))
 })
 

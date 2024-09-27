@@ -24,3 +24,7 @@ npm i gulp
 //Команды для вебпака
 
 npm i webpack-stream style-loader css-loader --save-dev
+
+//Babel
+
+npm i gulp-babel @babel/core @babel/preset-env
