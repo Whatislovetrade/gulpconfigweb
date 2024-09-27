@@ -28,3 +28,7 @@ npm i webpack-stream style-loader css-loader --save-dev
 //Babel
 
 npm i gulp-babel @babel/core @babel/preset-env
+
+//image min
+
+npm i gulp-imagemin@7 --save-dev через require новые версии через es6 build
