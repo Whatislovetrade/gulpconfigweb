@@ -32,3 +32,8 @@ npm i gulp-babel @babel/core @babel/preset-env
 //image min
 
 npm i gulp-imagemin@7 --save-dev через require новые версии через es6 build
+
+//changed 
+
+npm install --save-dev gulp-changed@4.0.3 либо новую в ес6
+
