@@ -19,3 +19,8 @@ npm i gulp
       gulp-notify 
       gulp-group-css-media-queries --save-dev
 
+//Основные команды для верстки
+
+//Команды для вебпака
+
+npm i webpack-stream style-loader css-loader --save-dev
