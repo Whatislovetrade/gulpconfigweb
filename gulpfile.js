@@ -1,6 +1,7 @@
 const gulp = require('gulp')
 const fileInclude = require('gulp-file-include')
 const sass = require('gulp-sass')(require('sass'))
+const sassGlob = require('gulp-sass-glob')
 const server = require('gulp-server-livereload')
 const clean = require('gulp-clean')
 const fs = require('fs')
@@ -37,7 +38,7 @@ const plumberNotify = (title) => {
 gulp.task('clean', function(done) {
     if(fs.existsSync('./dist/')) {
         return gulp.src('./dist/', {read: false})
-            .pipe(clean({forse: true}))
+            .pipe(clean({force: true}))
     }
     done()
 })
@@ -55,6 +56,7 @@ gulp.task('sass', function() {
         .pipe(changed('./dist/css'))
         .pipe(plumber(plumberNotify('sass')))
         .pipe(sourceMaps.init())
+        .pipe(sassGlob())
         .pipe(sass().on('error', sass.logError))
         // .pipe(groupMedia())
         .pipe(sourceMaps.write())
