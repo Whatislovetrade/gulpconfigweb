@@ -35,25 +35,25 @@ const plumberNotify = (title) => {
 }
 
 
-gulp.task('clean:dev', function(done) {
-    if(fs.existsSync('./build/')) {
-        return gulp.src('./build/', {read: false})
+gulp.task('clean:docks', function(done) {
+    if(fs.existsSync('./docks/')) {
+        return gulp.src('./docks/', {read: false})
             .pipe(clean({force: true}))
     }
     done()
 })
 
-gulp.task('html:dev', function() {
+gulp.task('html:docks', function() {
     return gulp.src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
-        .pipe(changed('./build/'))
+        .pipe(changed('./docks/'))
         .pipe(plumber(plumberNotify('HTML')))
         .pipe(fileInclude(fileIncludeSettings))
-        .pipe(gulp.dest('./build'))
+        .pipe(gulp.dest('./docks'))
 })
 
-gulp.task('sass:dev', function() {
+gulp.task('sass:docks', function() {
     return gulp.src('src/sass/**/*.+(scss|sass)')
-        .pipe(changed('./build/css'))
+        .pipe(changed('./docks/css'))
         .pipe(plumber(plumberNotify('sass')))
         .pipe(sourceMaps.init())
         .pipe(sassGlob())
@@ -61,48 +61,48 @@ gulp.task('sass:dev', function() {
         .pipe(groupMedia())
         .pipe(sourceMaps.write())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(gulp.dest('./build/css'));
+        .pipe(gulp.dest('./docks/css'));
 })
 
-gulp.task('images:dev', function() {
+gulp.task('images:docks', function() {
     return gulp.src('./src/img/**/*')
-        .pipe(changed('./build/img/'))
+        .pipe(changed('./docks/img/'))
         .pipe(imagemin({verbose: true}))
-        .pipe(gulp.dest('./build/img/'))
+        .pipe(gulp.dest('./docks/img/'))
 })
 
-gulp.task('fonts:dev', function() {
+gulp.task('fonts:docks', function() {
     return gulp.src('./src/fonts/**/*')
-        .pipe(changed('./build/fonts'))
-        .pipe(gulp.dest('./build/fonts/'))
+        .pipe(changed('./docks/fonts'))
+        .pipe(gulp.dest('./docks/fonts/'))
 })
 
-gulp.task('files:dev', function() {
+gulp.task('files:docks', function() {
     return gulp.src('./src/files/**/*')
-        .pipe(changed('./build/files'))
-        .pipe(gulp.dest('./build/files/'))
+        .pipe(changed('./docks/files'))
+        .pipe(gulp.dest('./docks/files/'))
 })
 
-gulp.task('js:dev', function() {
+gulp.task('js:docks', function() {
     return gulp.src('./src/js/*.js')
-        .pipe(changed('./build/js'))
+        .pipe(changed('./docks/js'))
         .pipe(plumber(plumberNotify('JS')))
         // .pipe(babel())
         .pipe(webpack(require('../webpack.config.js')))
-        .pipe(gulp.dest('./build/js'))
+        .pipe(gulp.dest('./docks/js'))
 })
 
-gulp.task('server:dev', function() {
-    return gulp.src('./build/')
+gulp.task('server:docks', function() {
+    return gulp.src('./docks/')
         .pipe(server(serverOptions))
 })
 
-gulp.task('watch:dev', function() {
-    gulp.watch('./src/sass/**/*.scss', gulp.parallel('sass:dev'))
-    gulp.watch('./src/**/*.html', gulp.parallel('html:dev'))
-    gulp.watch('./src/img/**/*', gulp.parallel('images:dev'))
-    gulp.watch('./src/fonts/**/*', gulp.parallel('fonts:dev'))
-    gulp.watch('./src/files/**/*', gulp.parallel('files:dev'))
-    gulp.watch('./src/js/**/*.js', gulp.parallel('js:dev'))
+gulp.task('watch:docks', function() {
+    gulp.watch('./src/sass/**/*.scss', gulp.parallel('sass:docks'))
+    gulp.watch('./src/**/*.html', gulp.parallel('html:docks'))
+    gulp.watch('./src/img/**/*', gulp.parallel('images:docks'))
+    gulp.watch('./src/fonts/**/*', gulp.parallel('fonts:docks'))
+    gulp.watch('./src/files/**/*', gulp.parallel('files:docks'))
+    gulp.watch('./src/js/**/*.js', gulp.parallel('js:docks'))
 })
 
