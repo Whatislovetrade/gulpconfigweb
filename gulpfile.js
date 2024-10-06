@@ -16,6 +16,6 @@ gulp.task('default', gulp.series(
 gulp.task('docks', gulp.series(
     'clean:docks',
      gulp.parallel('html:docks', 'sass:docks', 'images:docks', 'fonts:docks', 'files:docks', 'js:docks'),
-     gulp.parallel('server:docks', 'watch:docks')
+     gulp.parallel('server:docks')
 
 ))
